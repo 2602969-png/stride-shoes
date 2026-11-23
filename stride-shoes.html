@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STRIDE | Move Different</title>
+
+<style>
+/* ===== BASIC SETTINGS ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }               /* smooth scrolling when a link is clicked */
+body { font-family: Arial, Helvetica, sans-serif; color: #111; background: #fff; }
+a { color: inherit; text-decoration: none; }
+section { padding: 70px 6%; }
+h2 { font-size: 2rem; text-transform: uppercase; margin-bottom: 25px; }
+
+/* ===== TOP BAR AND MENU ===== */
+.topbar { background: #111; color: #fff; text-align: center; padding: 8px; font-size: 14px; }
+nav { position: sticky; top: 0; background: #fff; z-index: 10;      /* sticky = stays on top while scrolling */
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px; padding: 15px 6%; border-bottom: 1px solid #ddd; }
+.logo { font-size: 28px; font-weight: 900; letter-spacing: 3px; }
+nav ul { list-style: none; display: flex; gap: 25px; flex-wrap: wrap; }
+nav ul a { font-weight: bold; }
+nav ul a:hover { color: #fa5400; }
+.bag { background: #111; color: #fff; padding: 8px 18px; border-radius: 30px; font-weight: bold; }
+
+/* ===== HERO (big first section) ===== */
+.hero { background: #f2f2f2; display: flex; align-items: center; justify-content: space-between;
+        flex-wrap: wrap; gap: 20px; min-height: 80vh; overflow: hidden; padding: 0 6%; }
+.hero-text { max-width: 520px; }
+.hero small { color: #fa5400; font-weight: bold; letter-spacing: 2px; }
+.hero h1 { font-size: 4.5rem; line-height: 1; text-transform: uppercase; margin: 15px 0; }
+.hero p { color: #555; margin-bottom: 25px; }
+.hero-shoe { font-size: 16rem; transition: transform 0.6s; cursor: pointer; transform: rotate(-15deg); }
+.hero-shoe:hover { transform: rotate(-5deg) scale(1.2); }          /* ZOOM IN effect */
+
+/* ===== BUTTONS ===== */
+.btn { display: inline-block; background: #111; color: #fff; padding: 14px 32px; border-radius: 40px;
+       font-weight: bold; border: none; cursor: pointer; font-size: 16px; transition: 0.3s; }
+.btn:hover { background: #fa5400; transform: scale(1.08); }
+.btn-light { background: #fff; color: #111; }
+
+/* ===== CATEGORIES ===== */
+.cats { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.cat { height: 280px; border-radius: 12px; display: flex; flex-direction: column; justify-content: flex-end;
+       padding: 25px; color: #fff; font-size: 1.6rem; font-weight: bold; text-transform: uppercase;
+       position: relative; overflow: hidden; transition: transform 0.4s; }
+.cat:hover { transform: scale(1.04); }
+.cat span.big { position: absolute; top: 10px; right: 15px; font-size: 7rem; opacity: 0.9; transition: transform 0.5s; }
+.cat:hover span.big { transform: scale(1.3) rotate(-10deg); }                           /* ZOOM IN effect */
+
+/* ===== PRODUCTS ===== */
+.products { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; }
+.card .pic { height: 280px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+             overflow: hidden; }                      /* overflow hidden keeps the zoom inside the box */
+.card .pic span { font-size: 9rem; transition: transform 0.5s; }
+.card:hover .pic span { transform: scale(1.35) rotate(-8deg); }   /* ZOOM IN when mouse is on card */                  /* ZOOM IN when mouse is on card */
+.card h3 { margin-top: 12px; }
+.card .type { color: #777; font-size: 14px; }
+.card .price { font-weight: bold; margin: 6px 0 10px; }
+.tag { background: #fa5400; color: #fff; font-size: 12px; padding: 3px 10px; border-radius: 20px; }
+details { margin-bottom: 10px; font-size: 14px; color: #444; }
+summary { cursor: pointer; font-weight: bold; color: #111; }
+
+/* ===== SALE BANNER ===== */
+.sale { background: #111; color: #fff; text-align: center; }
+.sale h2 { font-size: 3rem; }
+.sale p { margin-bottom: 25px; color: #ccc; }
+
+/* ===== PERKS ===== */
+.perks { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center; }
+.perk { padding: 30px; border: 1px solid #ddd; border-radius: 12px; transition: 0.3s; }
+.perk:hover { transform: translateY(-8px); border-color: #fa5400; }
+.perk div { font-size: 2.5rem; }
+
+/* ===== FAQ + FORM ===== */
+.faq { max-width: 700px; }
+.faq details { font-size: 16px; padding: 15px 0; border-bottom: 1px solid #ddd; }
+form { max-width: 520px; display: grid; gap: 15px; }
+label { font-weight: bold; font-size: 14px; }
+input, select { width: 100%; padding: 13px; border: 1px solid #aaa; border-radius: 8px; font-size: 16px; }
+input:focus, select:focus { outline: 2px solid #fa5400; }
+.sizes { display: flex; gap: 14px; flex-wrap: wrap; }
+.sizes label { font-weight: normal; }
+.sizes input { width: auto; }
+
+/* ===== FOOTER ===== */
+footer { background: #111; color: #aaa; padding: 40px 6%; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+footer a:hover { color: #fff; }
+footer ul { list-style: none; line-height: 2; }
+</style>
+</head>
+
+<body id="top">
+
+
+<!-- TOP BAR -->
+<div class="topbar">🚚 Free delivery on orders over Rs. 15,000</div>
+
+<!-- MENU: each link jumps to the section with the same id -->
+<nav>
+  <a href="#top" class="logo">STRIDE</a>
+  <ul>
+    <li><a href="#categories">Categories</a></li>
+    <li><a href="#shop">New Arrivals</a></li>
+    <li><a href="#sale">Sale</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#order" class="bag">🛍 Order Now</a>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-text">
+    <small>NEW COLLECTION 2026</small>
+    <h1>Move<br>Different.</h1>
+    <p>Lightweight, bold and built for every step. Find the pair that matches your pace.</p>
+    <a href="#shop" class="btn">Shop Now</a>
+  </div>
+  <div class="hero-shoe">👟</div>
+</header>
+
+<!-- CATEGORIES -->
+<section id="categories">
+  <h2>Shop by Category</h2>
+  <div class="cats">
+    <a href="#shop" class="cat" style="background:#2b6cff">Men<span class="big">👟</span></a>
+    <a href="#shop" class="cat" style="background:#e63e8c">Women<span class="big">👠</span></a>
+    <a href="#shop" class="cat" style="background:#16a34a">Kids<span class="big">🥾</span></a>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="shop">
+  <h2>New Arrivals</h2>
+  <div class="products">
+
+    <div class="card">
+      <div class="pic" style="background:#ffe3d1"><span>👟</span></div>
+      <h3>Stride Air Runner</h3>
+      <p class="type">Men's Running Shoe</p>
+      <p class="price">Rs. 18,999 <span class="tag">NEW</span></p>
+      <details><summary>Details</summary><p>Light mesh top and soft cushioned sole for daily runs.</p></details>
+      <a href="#order" class="btn">Buy Now</a>
+    </div>
+
+    <div class="card">
+      <div class="pic" style="background:#dbe8ff"><span>👟</span></div>
+      <h3>Stride Court Pro</h3>
+      <p class="type">Basketball Shoe</p>
+      <p class="price">Rs. 22,499</p>
+      <details><summary>Details</summary><p>High-top support and strong grip for fast cuts on court.</p></details>
+      <a href="#order" class="btn">Buy Now</a>
+    </div>
+
+    <div class="card">
+      <div class="pic" style="background:#fde1ee"><span>👠</span></div>
+      <h3>Stride Glide</h3>
+      <p class="type">Women's Lifestyle Shoe</p>
+      <p class="price">Rs. 16,499 <span class="tag">HOT</span></p>
+      <details><summary>Details</summary><p>Clean design that goes with jeans, dresses and everything else.</p></details>
+      <a href="#order" class="btn">Buy Now</a>
+    </div>
+
+    <div class="card">
+      <div class="pic" style="background:#d9f5e3"><span>🥾</span></div>
+      <h3>Stride Trail X</h3>
+      <p class="type">Hiking Boot</p>
+      <p class="price">Rs. 24,999</p>
+      <details><summary>Details</summary><p>Waterproof and tough, made for mountains and rough paths.</p></details>
+      <a href="#order" class="btn">Buy Now</a>
+    </div>
+
+    <div class="card">
+      <div class="pic" style="background:#fff3c4"><span>👟</span></div>
+      <h3>Stride Mini Dash</h3>
+      <p class="type">Kids' Sneaker</p>
+      <p class="price">Rs. 9,999</p>
+      <details><summary>Details</summary><p>Easy velcro straps and a flexible sole for little feet.</p></details>
+      <a href="#order" class="btn">Buy Now</a>
+    </div>
+
+    <div class="card">
+      <div class="pic" style="background:#e5e5e5"><span>👞</span></div>
+      <h3>Stride Classic</h3>
+      <p class="type">Formal Shoe</p>
+      <p class="price">Rs. 14,499</p>
+      <details><summary>Details</summary><p>Smooth leather finish for office, events and interviews.</p></details>
+      <a href="#order" class="btn">Buy Now</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- SALE BANNER -->
+<section id="sale" class="sale">
+  <h2>Season Sale: Up to 40% Off</h2>
+  <p>Limited pairs. Once they are gone, they are gone.</p>
+  <a href="#order" class="btn btn-light">Grab the Deal</a>
+</section>
+
+<!-- PERKS -->
+<section>
+  <h2>Why STRIDE?</h2>
+  <div class="perks">
+    <div class="perk"><div>🚚</div><h3>Fast Delivery</h3><p>At your door in 3 days</p></div>
+    <div class="perk"><div>🔄</div><h3>Easy Returns</h3><p>30 days, no questions</p></div>
+    <div class="perk"><div>🔒</div><h3>Secure Payment</h3><p>Safe and trusted</p></div>
+    <div class="perk"><div>⭐</div><h3>Top Quality</h3><p>Tested by athletes</p></div>
+  </div>
+</section>
+
+<!-- FAQ (click to open and close) -->
+<section id="faq">
+  <h2>Questions?</h2>
+  <div class="faq">
+    <details><summary>How long does delivery take?</summary><p>Usually 3 to 5 working days.</p></details>
+    <details><summary>Can I return my shoes?</summary><p>Yes, within 30 days if they are unworn.</p></details>
+    <details><summary>How do I find my size?</summary><p>Measure your foot in cm and compare it with the size chart.</p></details>
+  </div>
+</section>
+
+<!-- ORDER FORM: "required" makes the browser check empty fields. mailto opens your email app. -->
+<section id="order" style="background:#f2f2f2">
+  <h2>Place Your Order</h2>
+  <form action="mailto:yourname@example.com" method="post" enctype="text/plain">
+    <div><label for="n">Full Name</label><input id="n" name="Name" type="text" placeholder="Your name" required></div>
+    <div><label for="e">Email</label><input id="e" name="Email" type="email" placeholder="you@email.com" required></div>
+    <div>
+      <label for="s">Choose Shoe</label>
+      <select id="s" name="Shoe" required>
+        <option value="">-- Select --</option>
+        <option>Stride Air Runner</option>
+        <option>Stride Court Pro</option>
+        <option>Stride Glide</option>
+        <option>Stride Trail X</option>
+        <option>Stride Mini Dash</option>
+        <option>Stride Classic</option>
+      </select>
+    </div>
+    <div>
+      <label>Size (EU)</label>
+      <div class="sizes">
+        <label><input type="radio" name="Size" value="39" required> 39</label>
+        <label><input type="radio" name="Size" value="40"> 40</label>
+        <label><input type="radio" name="Size" value="41"> 41</label>
+        <label><input type="radio" name="Size" value="42"> 42</label>
+        <label><input type="radio" name="Size" value="43"> 43</label>
+        <label><input type="radio" name="Size" value="44"> 44</label>
+      </div>
+    </div>
+    <label><input type="checkbox" required style="width:auto"> I agree to the terms and conditions</label>
+    <button class="btn" type="submit">Send Order</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div><h3 style="color:#fff">STRIDE</h3><p>Move Different. AICT Class Project.</p></div>
+  <ul>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#sale">Sale</a></li>
+    <li><a href="#faq">Help</a></li>
+  </ul>
+  <ul>
+    <li><a href="mailto:yourname@example.com">Email us</a></li>
+    <li><a href="#top">⬆ Back to top</a></li>
+  </ul>
+</footer>
+
+</body>
+</html>
